@@ -1,24 +1,21 @@
 <?php
 /**
- * Changing for GLAVPUNKT plugin from LUSTRADIGITAL
- */
-
-/**
  * Убираем поля, добавленные плагином
  */
  remove_filter('woocommerce_checkout_fields', 'glavpunkt_custom_override_checkout_fields');
 
  
-/**
- * Валидация полей для дальнейшего вывода способа доставки
- *
- * @param array $posted
- */
 remove_action('woocommerce_review_order_before_cart_contents', 'glavpunkt_validate_order', 10);
 remove_action('woocommerce_after_checkout_validation', 'glavpunkt_validate_order', 10);
 
 add_action('woocommerce_review_order_before_cart_contents', 'glavpunkt_lustra_validate_order', 10);
 add_action('woocommerce_after_checkout_validation', 'glavpunkt_lustra_validate_order', 10);
+
+/**
+ * Валидация полей для дальнейшего вывода способа доставки
+ *
+ * @param array $posted
+ */
 function glavpunkt_lustra_validate_order()
 {
 
@@ -43,9 +40,6 @@ function glavpunkt_lustra_validate_order()
         ) {
             continue;
         }
-
-        // Проверка веса
-        // global $wilmax_cart_weight;
 
         $weight = 0;
 
